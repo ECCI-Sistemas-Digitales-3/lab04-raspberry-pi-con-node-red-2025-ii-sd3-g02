@@ -1,0 +1,175 @@
+[
+    {
+        "id": "686eb66d61cde669",
+        "type": "tab",
+        "label": "Flujo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e7602427e4d90197",
+        "type": "ui_colour_picker",
+        "z": "686eb66d61cde669",
+        "name": "",
+        "label": "",
+        "group": "bfb4c1ea4ce58134",
+        "format": "rgb",
+        "outformat": "string",
+        "showSwatch": true,
+        "showPicker": false,
+        "showValue": false,
+        "showHue": false,
+        "showAlpha": false,
+        "showLightness": true,
+        "square": "false",
+        "dynOutput": "false",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "7065058bb05d6a2e",
+                "86bb9afad4cb1e95"
+            ]
+        ]
+    },
+    {
+        "id": "b4841adaecfae93e",
+        "type": "ui_text_input",
+        "z": "686eb66d61cde669",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "bfb4c1ea4ce58134",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 720,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7065058bb05d6a2e",
+        "type": "debug",
+        "z": "686eb66d61cde669",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "86bb9afad4cb1e95",
+        "type": "function",
+        "z": "686eb66d61cde669",
+        "name": "function 1",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "b4841adaecfae93e",
+                "87e259e2fa410fb4"
+            ]
+        ]
+    },
+    {
+        "id": "87e259e2fa410fb4",
+        "type": "file",
+        "z": "686eb66d61cde669",
+        "name": "",
+        "filename": "/home/jgn20252/Documentos/texto.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 710,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11376a26a387247e",
+        "type": "ui_button",
+        "z": "686eb66d61cde669",
+        "name": "",
+        "group": "bfb4c1ea4ce58134",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 350,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bfb4c1ea4ce58134",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "5e49fbf770a46f1b",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5e49fbf770a46f1b",
+        "type": "ui_tab",
+        "name": "Color",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "0d3acbb4cab2cad5",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]

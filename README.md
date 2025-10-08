@@ -108,6 +108,7 @@ Este flujo permite comprender los pasos fundamentales de un sistema ADC/DAC real
 5. **Ver resultados**
    - Observa los valores almacenados para analizar el comportamiento del sistema.  
    - Puedes modificar los valores de entrada y repetir la prueba para comparar resultados.
+     
    ![Flujo del Laboratorio 4](lab%204.jpg)
 
 6. **Finalizar**

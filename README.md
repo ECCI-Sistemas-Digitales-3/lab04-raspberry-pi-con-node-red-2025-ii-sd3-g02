@@ -111,7 +111,9 @@ Este flujo permite comprender los pasos fundamentales de un sistema ADC/DAC real
      
    ![Flujo del Laboratorio 4](lab%204.jpg)
 
-6. **Finalizar**
+   ![Flujo del Laboratorio 4](lab%204..jpg)
+
+7. **Finalizar**
    - Detén el flujo desde el panel de Node-RED o cierra la interfaz gráfica.
 
 

@@ -90,35 +90,35 @@ Este flujo permite comprender los pasos fundamentales de un sistema ADC/DAC real
 ## Instrucciones de uso
 
 1. **Ejecutar el programa**
-   - Inicia Node-RED y abre el flujo del laboratorio.  
-   - Despliega el panel Dashboard para acceder a la interfaz gráfica.
+   - Inicie Node-RED y abra el flujo del laboratorio.  
+   - Despliegue el panel Dashboard para acceder a la interfaz gráfica.
 
 2. **Generar una señal analógica**
-   - Usa el control *Color Picker* para variar un valor de entrada (puede interpretarse como voltaje o intensidad).  
+   - Use el control *Color Picker* para variar un valor de entrada (puede interpretarse como voltaje o intensidad).  
    - Cada cambio genera un nuevo valor a procesar.
 
 3. **Procesamiento digital**
    - El nodo *Function* recibe la entrada, la convierte a formato digital y la envía a los nodos de salida.  
-   - Puedes verificar el valor procesado en el panel *Debug*.
+   - Puede verificar el valor procesado en el panel *Debug*.
 
 4. **Almacenamiento**
    - Los datos convertidos se guardan automáticamente en el archivo `texto.txt` en el directorio especificado.  
    - Este archivo representa el resultado digital final del proceso.
 
 5. **Ver resultados**
-   - Observa los valores almacenados para analizar el comportamiento del sistema.  
-   - Puedes modificar los valores de entrada y repetir la prueba para comparar resultados.
+   - Observe los valores almacenados para analizar el comportamiento del sistema.  
+   - Puede modificar los valores de entrada y repetir la prueba para comparar resultados.
      
    ![Flujo del Laboratorio 4](lab%204.jpg)
 
    ![Flujo del Laboratorio 4](lab%204..jpg)
 
 7. **Finalizar**
-   - Detén el flujo desde el panel de Node-RED o cierra la interfaz gráfica.
+   - Detenga el flujo desde el panel de Node-RED o cierre la interfaz gráfica.
 
 
 ## Conclusiones
 
-El laboratorio permitió comprender la relación entre el **dominio analógico y digital**, representando cómo una variable continua puede convertirse, procesarse y almacenarse dentro de un entorno controlado.  
-Aunque se trabajó en un entorno simulado, los principios aplicados son equivalentes a los de un sistema de adquisición de datos real con sensores, conversores y actuadores.
+El laboratorio facilitó la comprensión de la interacción entre los dominios analógico y digital, demostrando cómo una señal continua puede ser convertida, procesada y almacenada dentro de un sistema digital controlado.
+A pesar de haberse desarrollado en un entorno simulado, los conceptos y procedimientos aplicados reflejan fielmente el funcionamiento de un sistema real de adquisición y procesamiento de datos, que integra sensores, convertidores y actuadores.
 

@@ -9,112 +9,52 @@ Nicolas Quiroga 109393
 
 ## Documentación
 
-Este flujo de Node-RED Dashboard permite capturar un color desde un selector gráfico (color picker), procesarlo a través de un nodo de función, y guardar el valor resultante en un archivo de texto local. El flujo simula el funcionamiento de un sistema analógico–digital–analógico, donde una señal analógica (color) se convierte en un valor digital procesado y almacenado. 
+El propósito de este laboratorio es desarrollar un sistema para la detección, visualización y registro de colores empleando una Raspberry Pi. El proyecto se implementa en Node-RED, aprovechando su entorno gráfico de programación por flujos. A través del dashboard de Node-RED, el usuario puede elegir un color, observar su equivalente en formato RGB y hexadecimal, y guardar los valores seleccionados en un archivo de texto, lo que permite su análisis posterior.
 
-## Descripción de clases y componentes
+## Preparación del Entorno y Puesta en Marcha del Sistema
 
-### Señal analógica (Entrada)
+Para la correcta implementación del proyecto en la Raspberry Pi, fue necesario realizar una serie de configuraciones iniciales que permitieron establecer la comunicación remota, instalar el entorno de trabajo y garantizar su funcionamiento automático.
 
-Representa la fuente de datos que simula la lectura de un sensor analógico.  
-En el flujo se utilizó un nodo **Color Picker**, equivalente a una variable analógica que cambia dinámicamente.  
-Cada variación representa un valor que se desea muestrear y convertir.
+## Conexión Remota a la Raspberry Pi
+El primer paso consistió en habilitar el acceso remoto mediante el protocolo SSH. Esto permitió conectarse a la Raspberry Pi desde otro dispositivo a través de la terminal. Para conocer la dirección IP del equipo, se utilizó el comando hostname -I, y posteriormente se estableció la conexión con la instrucción ssh usuario@direccion_IP. Esta configuración facilita la administración del sistema sin necesidad de utilizar periféricos adicionales.
 
-**Método:**  
-- Envía el valor analógico hacia el bloque de procesamiento (nodo *function*), donde se traduce a un formato digital interpretable.  
+## Instalación de Node-RED
+Una vez establecida la conexión, se procedió con la instalación de Node.js, npm y Node-RED, utilizando el script oficial que automatiza el proceso. Durante la instalación se aceptaron las configuraciones por defecto y se incluyeron los nodos específicos para el hardware de la Raspberry Pi. Dado que el dispositivo posee recursos limitados, se recomendó iniciar Node-RED con un parámetro que optimiza el uso de memoria (node-red-pi --max-old-space-size=256), evitando errores de ejecución.
 
----
+Tras la instalación, el entorno gráfico de Node-RED quedó disponible para ser accedido desde cualquier navegador conectado a la misma red local, ingresando la dirección del equipo seguida del puerto correspondiente (por ejemplo, http://<IP_Raspberry>:1880/ui).
 
-### Conversor ADC (Procesamiento)
+## Ejecución Automática como Servicio
+Para que Node-RED se iniciara automáticamente al encender la Raspberry Pi, se configuró como un servicio del sistema. Esto se logró mediante los comandos sudo systemctl enable nodered.service y sudo systemctl start nodered.service, asegurando que la aplicación permaneciera activa incluso después de cerrar la sesión SSH. Además, fue posible verificar su estado y revisar los registros en tiempo real mediante systemctl status nodered.service y journalctl -u nodered -f.
 
-Simula el proceso de **muestreo y cuantificación** de la señal analógica.  
-Se implementa mediante un nodo **Function** que actúa como un bloque intermedio de conversión: recibe el valor continuo, lo convierte a formato digital (texto o número) y lo prepara para su almacenamiento.
+## Instalación del Panel de Control (Dashboard)
+Finalmente, se añadió el paquete de nodos necesario para construir la interfaz gráfica del usuario. Desde el menú de Node-RED, se accedió a la opción Manage palette → Install y se instaló el complemento node-red-dashboard. Con esta herramienta, el sistema adquirió una interfaz visual que permite la interacción directa con los flujos desarrollados, accesible también desde cualquier navegador dentro de la red local.
 
-**Métodos principales:**  
-- `func`: procesa la entrada y retorna un mensaje digital (`msg`) que puede ser almacenado.  
-- `debug`: permite observar el resultado digital en tiempo real, verificando la integridad del proceso.  
 
----
+## Configuración de Nodos en Node-RED
 
-### Conversor DAC (Salida)
+En esta etapa del proyecto se definió la estructura y el funcionamiento de los nodos dentro del flujo de trabajo en Node-RED. Cada nodo cumple un rol específico en la captura, visualización y almacenamiento de los colores seleccionados a través de la interfaz gráfica.
 
-Corresponde al proceso de **reconstrucción** o almacenamiento de la señal digital convertida.  
-En el flujo se representa con el nodo **File**, que guarda los datos recibidos en un archivo (`texto.txt`) dentro del sistema.  
-De esta forma, se mantiene una traza persistente de las conversiones realizadas.
+## Nodo Selector de Color (Color Picker)
+Este nodo, perteneciente al dashboard, permite al usuario elegir un color desde una paleta visual. Se configuró dentro del grupo Default con la etiqueta “Selector de color”. El formato de salida se estableció en hexadecimal (por ejemplo, #0800ff), lo que facilita la representación precisa del color en la interfaz y su posterior conversión a otros formatos.
 
-**Método:**  
-- `file`: guarda los valores digitales recibidos, actuando como salida o memoria del sistema.  
+## Nodo de Entrada de Texto (Text Input)
+También ubicado en el grupo Default, este nodo muestra los valores RGB correspondientes al color seleccionado. Se añadió un mecanismo de validación para asegurar que los valores introducidos sigan el formato R,G,B, garantizando que cada componente numérico se encuentre dentro del rango 0 a 255. Esta validación evita errores en la interpretación de los datos antes de su almacenamiento.
 
----
+## Nodo de Almacenamiento (File Node)
+Finalmente, el sistema integra un nodo encargado de registrar los colores seleccionados en un archivo de texto. La ruta de almacenamiento se definió como /home/pi/test.txt, aunque puede modificarse según la estructura de archivos del proyecto. Para verificar la información guardada, se puede acceder al contenido del archivo directamente desde la terminal de la Raspberry Pi mediante el comando nano test.txt.
 
-### Interfaz de usuario
-
-El laboratorio incluyó una capa de interacción mediante el **Dashboard de Node-RED**, donde el usuario puede:  
-- Seleccionar el valor de entrada (simulando la señal analógica).  
-- Observar en consola el resultado de la conversión digital.  
-- Guardar la información generada.  
-
-Esta capa de interfaz cumple el mismo rol que una GUI o terminal en Python, y permite visualizar el flujo completo de datos.
-
----
-
-## Resumen del sistema
-
-El proceso completo puede dividirse en tres etapas principales:
-
-1. **Adquisición de señal analógica:** el usuario genera una entrada variable mediante un control gráfico.  
-2. **Conversión y procesamiento digital:** el valor se interpreta y se formatea en un tipo de dato digital.  
-3. **Almacenamiento y salida digital:** el valor digital se guarda en un archivo que representa la reconstrucción o persistencia de la señal.  
-
-Este flujo permite comprender los pasos fundamentales de un sistema ADC/DAC real, desde la captura de una variable física hasta su representación y almacenamiento digital.
-
----
-
-## Explicación de elementos técnicos
-
-**Node-RED Dashboard:** permite la creación de interfaces visuales (sliders, color pickers, botones) que simulan entradas analógicas o digitales.  
-
-**Function Node:** ejecuta fragmentos de código en JavaScript o Python que procesan la información.  
-
-**Debug Node:** muestra en tiempo real los datos en la consola lateral, útil para validar el funcionamiento del flujo.  
-
-**File Node:** administra la escritura de información en archivos, representando la salida o etapa DAC.  
-
-**ID y flujo:** cada nodo está identificado por un `id` único que facilita la trazabilidad dentro del sistema.  
-
----
-
-## Instrucciones de uso
-
-1. **Ejecutar el programa**
-   - Inicie Node-RED y abra el flujo del laboratorio.  
-   - Despliegue el panel Dashboard para acceder a la interfaz gráfica.
-
-2. **Generar una señal analógica**
-   - Use el control *Color Picker* para variar un valor de entrada (puede interpretarse como voltaje o intensidad).  
-   - Cada cambio genera un nuevo valor a procesar.
-
-3. **Procesamiento digital**
-   - El nodo *Function* recibe la entrada, la convierte a formato digital y la envía a los nodos de salida.  
-   - Puede verificar el valor procesado en el panel *Debug*.
-
-4. **Almacenamiento**
-   - Los datos convertidos se guardan automáticamente en el archivo `texto.txt` en el directorio especificado.  
-   - Este archivo representa el resultado digital final del proceso.
-
-5. **Ver resultados**
-   - Observe los valores almacenados para analizar el comportamiento del sistema.  
-   - Puede modificar los valores de entrada y repetir la prueba para comparar resultados.
      
    ![Flujo del Laboratorio 4](lab%204.jpg)
 
    ![Flujo del Laboratorio 4](lab%204..jpg)
 
-7. **Finalizar**
-   - Detenga el flujo desde el panel de Node-RED o cierre la interfaz gráfica.
 
 
 ## Conclusiones
 
-El laboratorio facilitó la comprensión de la interacción entre los dominios analógico y digital, demostrando cómo una señal continua puede ser convertida, procesada y almacenada dentro de un sistema digital controlado.
-A pesar de haberse desarrollado en un entorno simulado, los conceptos y procedimientos aplicados reflejan fielmente el funcionamiento de un sistema real de adquisición y procesamiento de datos, que integra sensores, convertidores y actuadores.
+La implementación del sistema de visualización y registro de colores en la Raspberry Pi permitió comprender de manera práctica la integración entre hardware, software y herramientas de programación visual como Node-RED. A través de este entorno, fue posible diseñar una interfaz intuitiva que facilita la interacción con el usuario y la gestión de datos en tiempo real.
+
+El uso de nodos específicos, como el Color Picker, el Text Input y el File Node, demostró la flexibilidad de Node-RED para crear aplicaciones funcionales sin necesidad de programar desde cero, aprovechando flujos gráficos y configuraciones modulares. Además, la instalación y configuración del dashboard proporcionó un entorno visual atractivo y accesible desde cualquier dispositivo conectado a la misma red.
+
+Configurar Node-RED como servicio del sistema aseguró su ejecución continua y automática, reforzando la estabilidad y autonomía del proyecto. Por otro lado, la optimización de memoria durante la ejecución permitió un rendimiento adecuado, considerando las limitaciones de hardware propias de la Raspberry Pi.
 

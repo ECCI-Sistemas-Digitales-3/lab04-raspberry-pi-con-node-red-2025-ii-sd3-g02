@@ -9,11 +9,7 @@ Nicolas Quiroga 109393
 
 ## Documentación
 
-En este laboratorio se implementó un sistema de conversión **analógico-digital (ADC)** y **digital-analógico (DAC)** utilizando Python y la herramienta **Node-RED**.  
-El objetivo fue comprender el proceso de adquisición, procesamiento y reconstrucción de una señal digital, simulando un entorno de sensado y almacenamiento de datos.  
-
-Se empleó un flujo en Node-RED que integra nodos de entrada (simulando una señal analógica), procesamiento mediante funciones Python embebidas y almacenamiento de datos en archivo de texto.  
-Este flujo representa el proceso completo de **conversión, tratamiento y visualización de datos**, tal como ocurre en un sistema físico con sensores y actuadores.  
+Este flujo de Node-RED Dashboard permite capturar un color desde un selector gráfico (color picker), procesarlo a través de un nodo de función, y guardar el valor resultante en un archivo de texto local. El flujo simula el funcionamiento de un sistema analógico–digital–analógico, donde una señal analógica (color) se convierte en un valor digital procesado y almacenado. 
 
 ## Descripción de clases y componentes
 

@@ -26,13 +26,16 @@ Tras la instalación, el entorno gráfico de Node-RED quedó disponible para ser
 ## Ejecución Automática como Servicio
 Para que Node-RED se iniciara automáticamente al encender la Raspberry Pi, se configuró como un servicio del sistema. Esto se logró mediante los comandos sudo systemctl enable nodered.service y sudo systemctl start nodered.service, asegurando que la aplicación permaneciera activa incluso después de cerrar la sesión SSH. Además, fue posible verificar su estado y revisar los registros en tiempo real mediante systemctl status nodered.service y journalctl -u nodered -f.
 
-## Instalación del Panel de Control (Dashboard)
+## Instalación del Dashboard
 Finalmente, se añadió el paquete de nodos necesario para construir la interfaz gráfica del usuario. Desde el menú de Node-RED, se accedió a la opción Manage palette → Install y se instaló el complemento node-red-dashboard. Con esta herramienta, el sistema adquirió una interfaz visual que permite la interacción directa con los flujos desarrollados, accesible también desde cualquier navegador dentro de la red local.
 
 
-## Configuración de Nodos en Node-RED
+## Nodos en Node-RED
 
 En esta etapa del proyecto se definió la estructura y el funcionamiento de los nodos dentro del flujo de trabajo en Node-RED. Cada nodo cumple un rol específico en la captura, visualización y almacenamiento de los colores seleccionados a través de la interfaz gráfica.
+
+## Nodo de Almacenamiento (File Node)
+Finalmente, el sistema integra un nodo encargado de registrar los colores seleccionados en un archivo de texto. La ruta de almacenamiento se definió como /home/pi/test.txt, aunque puede modificarse según la estructura de archivos del proyecto. Para verificar la información guardada, se puede acceder al contenido del archivo directamente desde la terminal de la Raspberry Pi mediante el comando nano test.txt.
 
 ## Nodo Selector de Color (Color Picker)
 Este nodo, perteneciente al dashboard, permite al usuario elegir un color desde una paleta visual. Se configuró dentro del grupo Default con la etiqueta “Selector de color”. El formato de salida se estableció en hexadecimal (por ejemplo, #0800ff), lo que facilita la representación precisa del color en la interfaz y su posterior conversión a otros formatos.
@@ -40,15 +43,11 @@ Este nodo, perteneciente al dashboard, permite al usuario elegir un color desde 
 ## Nodo de Entrada de Texto (Text Input)
 También ubicado en el grupo Default, este nodo muestra los valores RGB correspondientes al color seleccionado. Se añadió un mecanismo de validación para asegurar que los valores introducidos sigan el formato R,G,B, garantizando que cada componente numérico se encuentre dentro del rango 0 a 255. Esta validación evita errores en la interpretación de los datos antes de su almacenamiento.
 
-## Nodo de Almacenamiento (File Node)
-Finalmente, el sistema integra un nodo encargado de registrar los colores seleccionados en un archivo de texto. La ruta de almacenamiento se definió como /home/pi/test.txt, aunque puede modificarse según la estructura de archivos del proyecto. Para verificar la información guardada, se puede acceder al contenido del archivo directamente desde la terminal de la Raspberry Pi mediante el comando nano test.txt.
+## Resultados
 
  <img width="594" height="233" alt="estructura" src="https://github.com/user-attachments/assets/ad46c372-c269-47e6-8d5c-0d26015ba53d" />
 
-
    ![Flujo del Laboratorio 4](lab%204..jpg)
-
-
 
 ## Conclusiones
 

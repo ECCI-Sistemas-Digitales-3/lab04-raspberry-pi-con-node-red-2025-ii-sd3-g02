@@ -46,8 +46,8 @@ También ubicado en el grupo Default, este nodo muestra los valores RGB correspo
 ## Resultados
 
  <img width="594" height="233" alt="estructura" src="https://github.com/user-attachments/assets/ad46c372-c269-47e6-8d5c-0d26015ba53d" />
+<img width="1560" height="1152" alt="Screen Shot 2025-10-12 at 11 46 12 PM" src="https://github.com/user-attachments/assets/5b3ea3c1-7c1e-41c4-940d-f143ae4bd1a2" />
 
-   ![Flujo del Laboratorio 4](lab%204..jpg)
 
 ## Conclusiones
 

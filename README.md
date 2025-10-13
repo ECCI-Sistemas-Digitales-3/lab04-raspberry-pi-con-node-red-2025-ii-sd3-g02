@@ -43,8 +43,8 @@ También ubicado en el grupo Default, este nodo muestra los valores RGB correspo
 ## Nodo de Almacenamiento (File Node)
 Finalmente, el sistema integra un nodo encargado de registrar los colores seleccionados en un archivo de texto. La ruta de almacenamiento se definió como /home/pi/test.txt, aunque puede modificarse según la estructura de archivos del proyecto. Para verificar la información guardada, se puede acceder al contenido del archivo directamente desde la terminal de la Raspberry Pi mediante el comando nano test.txt.
 
-     
-   ![Flujo del Laboratorio 4](lab%204.jpg)
+ <img width="594" height="233" alt="estructura" src="https://github.com/user-attachments/assets/ad46c372-c269-47e6-8d5c-0d26015ba53d" />
+
 
    ![Flujo del Laboratorio 4](lab%204..jpg)
 
